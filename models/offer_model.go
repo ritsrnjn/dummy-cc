@@ -49,3 +49,26 @@ func ListOffers(accountID int64) ([]dbentity.Offer, error) {
 
 	return offers, nil
 }
+
+// GetOffer gets an offer from the database.
+func GetOffer(offerID int64) (dbentity.Offer, error) {
+	var offer dbentity.Offer
+	result, err := sqldb.Query("SELECT * FROM offers WHERE offer_id = ?", offerID)
+	if err != nil {
+		return offer, err
+	}
+
+	if result.Next() {
+		err = result.Scan(&offer.OfferID, &offer.AccountID, &offer.LimitType, &offer.NewLimit, &offer.ActivationTime, &offer.ExpirationTime, &offer.Status)
+		if err != nil {
+			return offer, err
+		}
+	}
+	return offer, nil
+}
+
+// UpdateOffer updates an offer in the database.
+func UpdateOffer(updateOfferRequest request.UpdateOffer) error {
+	_, err := sqldb.Execute("UPDATE offers SET status = ? WHERE offer_id = ?", updateOfferRequest.Status, updateOfferRequest.OfferID)
+	return err
+}

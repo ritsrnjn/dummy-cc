@@ -59,13 +59,51 @@ func ListOffers(w http.ResponseWriter, r *http.Request) {
 	if err != nil && utils.Contains(err.Error(), "Bad Request") {
 		apiresponse.SendBadRequest(w, err.Error())
 		return
-	}
-
-	if err != nil {
+	} else if err != nil {
 		apiresponse.SendInternalServerError(w, err.Error())
 		return
 	}
 
 	// send response
 	apiresponse.SendOK(w, listOffersResponse)
+}
+
+// UpdateOffer is a handler function to update an offer
+func UpdateOffer(w http.ResponseWriter, r *http.Request) {
+	// get offerID from path params
+	offerID, err := utils.StringToInt64(chi.URLParam(r, "offerID"))
+
+	if err != nil {
+		apiresponse.SendBadRequest(w, "Invalid offerID")
+		return
+	}
+
+	// get request body
+	var updateOfferRequest request.UpdateOffer
+	err = json.NewDecoder(r.Body).Decode(&updateOfferRequest)
+	if err != nil {
+		apiresponse.SendBadRequest(w, "Invalid request body")
+		return
+	}
+
+	updateOfferRequest.OfferID = offerID
+	// validate request body
+	err = updateOfferRequest.Validate()
+	if err != nil {
+		apiresponse.SendBadRequest(w, err.Error())
+		return
+	}
+
+	// call service layer
+	err = service.UpdateOffer(updateOfferRequest)
+	if err != nil && utils.Contains(err.Error(), "Bad Request") {
+		apiresponse.SendBadRequest(w, err.Error())
+		return
+	} else if err != nil {
+		apiresponse.SendInternalServerError(w, err.Error())
+		return
+	}
+
+	// send response
+	apiresponse.SendOK(w, nil)
 }

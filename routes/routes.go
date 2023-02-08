@@ -29,7 +29,7 @@ func GetRouter() *chi.Mux {
 	// POST method to create offer
 	router.Post("/offer", handlers.CreateOffer)
 	// PATCH method to update offer
-	// router.Patch("/offer/{offerID}", handlers.UpdateOffer)
+	router.Patch("/offer/{offerID}", handlers.UpdateOffer)
 	// LIST method to list offers for a given accountID
 	router.Get("/account/{accountID}/offer", handlers.ListOffers)
 

@@ -50,3 +50,21 @@ func GetAccount(accountID int64) (dbentity.Account, error) {
 
 	return account, nil
 }
+
+// Update the account limit in the database.
+func UpdateAccountLimit(accountID int64, newAccountLimit int) error {
+	_, err := sqldb.Execute("UPDATE accounts SET account_limit = ?, last_account_limit = account_limit, account_limit_update_time = ? WHERE account_id = ?", newAccountLimit, utils.GetTmeStampInMs(), accountID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// Update the per transaction limit in the database.
+func UpdatePerTransactionLimit(accountID int64, newPerTransactionLimit int) error {
+	_, err := sqldb.Execute("UPDATE accounts SET per_transaction_limit = ?, last_per_transaction_limit = per_transaction_limit, per_transaction_limit_update_time = ? WHERE account_id = ?", newPerTransactionLimit, utils.GetTmeStampInMs(), accountID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
