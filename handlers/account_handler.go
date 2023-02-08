@@ -19,22 +19,22 @@ func HelloFunc(writer http.ResponseWriter, request *http.Request) {
 
 func CreateAccount(w http.ResponseWriter, r *http.Request) {
 	// get request body
-	var accountCreateRequest request.CreateAccount
-	err := json.NewDecoder(r.Body).Decode(&accountCreateRequest)
+	var createAccountRequest request.CreateAccount
+	err := json.NewDecoder(r.Body).Decode(&createAccountRequest)
 	if err != nil {
 		apiresponse.SendBadRequest(w, "Invalid request body")
 		return
 	}
 
 	// validate request body
-	err = accountCreateRequest.Validate()
+	err = createAccountRequest.Validate()
 	if err != nil {
 		apiresponse.SendBadRequest(w, err.Error())
 		return
 	}
 
 	// call service layer
-	createAccountResponse, err := service.CreateAccount(accountCreateRequest)
+	createAccountResponse, err := service.CreateAccount(createAccountRequest)
 	if err != nil {
 		apiresponse.SendInternalServerError(w, err.Error())
 		return

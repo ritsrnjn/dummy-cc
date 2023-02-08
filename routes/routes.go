@@ -23,9 +23,15 @@ func GetRouter() *chi.Mux {
 
 	// POST method to create account
 	router.Post("/account", handlers.CreateAccount)
-
 	// GET method to get account details
 	router.Get("/account/{accountID}", handlers.GetAccount)
+
+	// POST method to create offer
+	router.Post("/offer", handlers.CreateOffer)
+	// PATCH method to update offer
+	// router.Patch("/offer/{offerID}", handlers.UpdateOffer)
+	// LIST method to list offers for a given accountID
+	router.Get("/account/{accountID}/offer", handlers.ListOffers)
 
 	return router
 }

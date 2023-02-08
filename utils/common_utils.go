@@ -2,6 +2,7 @@ package utils
 
 import (
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -16,4 +17,9 @@ func StringToInt64(s string) (int64, error) {
 		return 0, err
 	}
 	return i, nil
+}
+
+// check if a string contains a substring
+func Contains(str, substr string) bool {
+	return strings.Contains(str, substr)
 }
