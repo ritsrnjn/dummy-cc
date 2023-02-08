@@ -1,7 +1,12 @@
 package main
 
+import (
+	"net/http"
 
+	"ritsrnjn/dummy-cc/routes"
+)
 
 func main() {
-    println("Hello World")
+	router := routes.GetRouter()
+	http.ListenAndServe(":3000", router)
 }
