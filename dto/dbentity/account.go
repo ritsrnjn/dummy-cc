@@ -1,4 +1,4 @@
-package dto
+package dbentity
 
 type Account struct {
 	AccountID                 string `json:"account_id"`
