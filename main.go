@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"ritsrnjn/dummy-cc/config"
@@ -17,6 +18,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Starting dummy-cc project on port :3000")
 
 	router := routes.GetRouter()
 	http.ListenAndServe(":3000", router)

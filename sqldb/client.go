@@ -2,6 +2,7 @@ package sqldb
 
 import (
 	"database/sql"
+
 	"ritsrnjn/dummy-cc/config"
 
 	_ "github.com/go-sql-driver/mysql"
