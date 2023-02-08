@@ -52,3 +52,17 @@ func SendUnauthorized(w http.ResponseWriter, message string) {
 		Message: message,
 	})
 }
+
+// send 500 Internal Server Error response
+func SendInternalServerError(w http.ResponseWriter, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusInternalServerError)
+
+	if message == constants.EmptyString {
+		message = "Internal Server Error"
+	}
+	json.NewEncoder(w).Encode(ApiResponse{
+		Success: false,
+		Message: message,
+	})
+}
