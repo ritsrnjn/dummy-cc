@@ -1,10 +1,10 @@
 package dbentity
 
 type LimitOffer struct {
-	OfferId        string `json:"offer_id"`
-	AccountID      string `json:"account_id"`
+	OfferId        int64  `json:"offer_id"`
+	AccountID      int64  `json:"account_id"`
 	LimitType      string `json:"limit_type"`
 	NewLimit       int    `json:"new_limit"`
-	ActivationTime int    `json:"activation_time"`
-	ExpirationTime int    `json:"expiration_time"`
+	ActivationTime int64  `json:"activation_time"`
+	ExpirationTime int64  `json:"expiration_time"`
 }

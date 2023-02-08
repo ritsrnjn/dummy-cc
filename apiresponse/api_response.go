@@ -66,3 +66,17 @@ func SendInternalServerError(w http.ResponseWriter, message string) {
 		Message: message,
 	})
 }
+
+// send 404 Not Found response
+func SendNotFound(w http.ResponseWriter, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotFound)
+
+	if message == constants.EmptyString {
+		message = "Not Found"
+	}
+	json.NewEncoder(w).Encode(ApiResponse{
+		Success: false,
+		Message: message,
+	})
+}
