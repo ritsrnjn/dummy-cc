@@ -17,9 +17,8 @@ func GetRouter() *chi.Mux {
 	router.Use(middlewares.AuthTokenMiddleware)
 
 	router.Get("/", func(writer http.ResponseWriter, request *http.Request) {
-		writer.Write([]byte("Welcome to the chi"))
+		writer.Write([]byte("Welcome to the dummy-cc project!"))
 	})
-	router.Get("/hello", handlers.HelloFunc)
 
 	// POST method to create account
 	router.Post("/account", handlers.CreateAccount)
