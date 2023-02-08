@@ -20,7 +20,9 @@ func GetRouter() *chi.Mux {
 		writer.Write([]byte("Welcome to the chi"))
 	})
 	router.Get("/hello", handlers.HelloFunc)
-	// user authentication middleware
+
+	// add post method to create account
+	router.Post("/account", handlers.CreateAccount)
 
 	return router
 }

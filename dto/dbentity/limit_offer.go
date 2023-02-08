@@ -5,6 +5,6 @@ type LimitOffer struct {
 	AccountID      string `json:"account_id"`
 	LimitType      string `json:"limit_type"`
 	NewLimit       int    `json:"new_limit"`
-	ActivationTime string `json:"activation_time"`
-	ExpirationTime string `json:"expiration_time"`
+	ActivationTime int    `json:"activation_time"`
+	ExpirationTime int    `json:"expiration_time"`
 }
